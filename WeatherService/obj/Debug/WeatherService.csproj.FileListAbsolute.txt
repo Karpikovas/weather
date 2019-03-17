@@ -1,0 +1,10 @@
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\bin\Debug\WeatherService.exe.config
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\bin\Debug\WeatherService.exe
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\bin\Debug\WeatherService.pdb
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.Form1.resources
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.Properties.Resources.resources
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.exe
+C:\Users\user\Desktop\Универ\Лабораторные\Лабы С#\WeatherService\WeatherService\obj\Debug\WeatherService.pdb

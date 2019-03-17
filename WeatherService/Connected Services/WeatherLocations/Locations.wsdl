@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.gismeteo.ru/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.gismeteo.ru/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.gismeteo.ru/">
+      <s:element name="FindByCoords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="lng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindByCoordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindByCoordsResult" type="tns:LocationInfoShortResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LocationInfoShortResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="tns:ServiceResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfLocationInfoShort" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ServiceResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="errorCode" type="tns:ErrorCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="errorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ErrorCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="BadSerial" />
+          <s:enumeration value="WrongInputData" />
+          <s:enumeration value="WrongLanguageProvided" />
+          <s:enumeration value="DataNotFound" />
+          <s:enumeration value="InternalError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfLocationInfoShort">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LocationInfoShort" type="tns:LocationInfoShort" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationInfoShort">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="distance" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindByCoordsFull">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lat" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="lng" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindByCoordsFullResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindByCoordsFullResult" type="tns:LocationInfoFullResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LocationInfoFullResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="tns:ServiceResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfLocationInfoFull" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLocationInfoFull">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LocationInfoFull" type="tns:LocationInfoFull" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationInfoFull">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="town" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="region" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="distance" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindByNameResult" type="tns:LocationInfoShortResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindByNameFull">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindByNameFullResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindByNameFullResult" type="tns:LocationInfoFullResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountryName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serial" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountryNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCountryNameResult" type="tns:GetNameResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetNameResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="tns:ServiceResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRegionName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serial" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegionNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRegionNameResult" type="tns:GetNameResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serial" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="language" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLocationNameResult" type="tns:GetNameResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LocationInfoShortResult" type="tns:LocationInfoShortResult" />
+      <s:element name="LocationInfoFullResult" type="tns:LocationInfoFullResult" />
+      <s:element name="GetNameResult" type="tns:GetNameResult" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FindByCoordsSoapIn">
+    <wsdl:part name="parameters" element="tns:FindByCoords" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsSoapOut">
+    <wsdl:part name="parameters" element="tns:FindByCoordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullSoapIn">
+    <wsdl:part name="parameters" element="tns:FindByCoordsFull" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullSoapOut">
+    <wsdl:part name="parameters" element="tns:FindByCoordsFullResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:FindByName" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:FindByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullSoapIn">
+    <wsdl:part name="parameters" element="tns:FindByNameFull" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullSoapOut">
+    <wsdl:part name="parameters" element="tns:FindByNameFullResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountryName" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountryNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegionName" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegionNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocationName" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsHttpGetIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="lat" type="s:string" />
+    <wsdl:part name="lng" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsHttpGetOut">
+    <wsdl:part name="Body" element="tns:LocationInfoShortResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullHttpGetIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="lat" type="s:string" />
+    <wsdl:part name="lng" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullHttpGetOut">
+    <wsdl:part name="Body" element="tns:LocationInfoFullResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameHttpGetIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:LocationInfoShortResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullHttpGetIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullHttpGetOut">
+    <wsdl:part name="Body" element="tns:LocationInfoFullResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameHttpGetIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameHttpGetIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameHttpGetIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsHttpPostIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="lat" type="s:string" />
+    <wsdl:part name="lng" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsHttpPostOut">
+    <wsdl:part name="Body" element="tns:LocationInfoShortResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullHttpPostIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="lat" type="s:string" />
+    <wsdl:part name="lng" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByCoordsFullHttpPostOut">
+    <wsdl:part name="Body" element="tns:LocationInfoFullResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameHttpPostIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:LocationInfoShortResult" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullHttpPostIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="count" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FindByNameFullHttpPostOut">
+    <wsdl:part name="Body" element="tns:LocationInfoFullResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameHttpPostIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameHttpPostIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameHttpPostIn">
+    <wsdl:part name="serial" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="language" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetNameResult" />
+  </wsdl:message>
+  <wsdl:portType name="LocationsSoap">
+    <wsdl:operation name="FindByCoords">
+      <wsdl:input message="tns:FindByCoordsSoapIn" />
+      <wsdl:output message="tns:FindByCoordsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <wsdl:input message="tns:FindByCoordsFullSoapIn" />
+      <wsdl:output message="tns:FindByCoordsFullSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <wsdl:input message="tns:FindByNameSoapIn" />
+      <wsdl:output message="tns:FindByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <wsdl:input message="tns:FindByNameFullSoapIn" />
+      <wsdl:output message="tns:FindByNameFullSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <wsdl:input message="tns:GetCountryNameSoapIn" />
+      <wsdl:output message="tns:GetCountryNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <wsdl:input message="tns:GetRegionNameSoapIn" />
+      <wsdl:output message="tns:GetRegionNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <wsdl:input message="tns:GetLocationNameSoapIn" />
+      <wsdl:output message="tns:GetLocationNameSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LocationsHttpGet">
+    <wsdl:operation name="FindByCoords">
+      <wsdl:input message="tns:FindByCoordsHttpGetIn" />
+      <wsdl:output message="tns:FindByCoordsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <wsdl:input message="tns:FindByCoordsFullHttpGetIn" />
+      <wsdl:output message="tns:FindByCoordsFullHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <wsdl:input message="tns:FindByNameHttpGetIn" />
+      <wsdl:output message="tns:FindByNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <wsdl:input message="tns:FindByNameFullHttpGetIn" />
+      <wsdl:output message="tns:FindByNameFullHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <wsdl:input message="tns:GetCountryNameHttpGetIn" />
+      <wsdl:output message="tns:GetCountryNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <wsdl:input message="tns:GetRegionNameHttpGetIn" />
+      <wsdl:output message="tns:GetRegionNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <wsdl:input message="tns:GetLocationNameHttpGetIn" />
+      <wsdl:output message="tns:GetLocationNameHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LocationsHttpPost">
+    <wsdl:operation name="FindByCoords">
+      <wsdl:input message="tns:FindByCoordsHttpPostIn" />
+      <wsdl:output message="tns:FindByCoordsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <wsdl:input message="tns:FindByCoordsFullHttpPostIn" />
+      <wsdl:output message="tns:FindByCoordsFullHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <wsdl:input message="tns:FindByNameHttpPostIn" />
+      <wsdl:output message="tns:FindByNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <wsdl:input message="tns:FindByNameFullHttpPostIn" />
+      <wsdl:output message="tns:FindByNameFullHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <wsdl:input message="tns:GetCountryNameHttpPostIn" />
+      <wsdl:output message="tns:GetCountryNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <wsdl:input message="tns:GetRegionNameHttpPostIn" />
+      <wsdl:output message="tns:GetRegionNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <wsdl:input message="tns:GetLocationNameHttpPostIn" />
+      <wsdl:output message="tns:GetLocationNameHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LocationsSoap" type="tns:LocationsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindByCoords">
+      <soap:operation soapAction="http://ws.gismeteo.ru/FindByCoords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <soap:operation soapAction="http://ws.gismeteo.ru/FindByCoordsFull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <soap:operation soapAction="http://ws.gismeteo.ru/FindByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <soap:operation soapAction="http://ws.gismeteo.ru/FindByNameFull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <soap:operation soapAction="http://ws.gismeteo.ru/GetCountryName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <soap:operation soapAction="http://ws.gismeteo.ru/GetRegionName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <soap:operation soapAction="http://ws.gismeteo.ru/GetLocationName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LocationsSoap12" type="tns:LocationsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindByCoords">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/FindByCoords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/FindByCoordsFull" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/FindByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/FindByNameFull" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/GetCountryName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/GetRegionName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <soap12:operation soapAction="http://ws.gismeteo.ru/GetLocationName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LocationsHttpGet" type="tns:LocationsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="FindByCoords">
+      <http:operation location="/FindByCoords" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <http:operation location="/FindByCoordsFull" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <http:operation location="/FindByName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <http:operation location="/FindByNameFull" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <http:operation location="/GetCountryName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <http:operation location="/GetRegionName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <http:operation location="/GetLocationName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LocationsHttpPost" type="tns:LocationsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="FindByCoords">
+      <http:operation location="/FindByCoords" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByCoordsFull">
+      <http:operation location="/FindByCoordsFull" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByName">
+      <http:operation location="/FindByName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindByNameFull">
+      <http:operation location="/FindByNameFull" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryName">
+      <http:operation location="/GetCountryName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegionName">
+      <http:operation location="/GetRegionName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationName">
+      <http:operation location="/GetLocationName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Locations">
+    <wsdl:port name="LocationsSoap" binding="tns:LocationsSoap">
+      <soap:address location="http://ws.gismeteo.ru/Locations/Locations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LocationsSoap12" binding="tns:LocationsSoap12">
+      <soap12:address location="http://ws.gismeteo.ru/Locations/Locations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LocationsHttpGet" binding="tns:LocationsHttpGet">
+      <http:address location="http://ws.gismeteo.ru/Locations/Locations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LocationsHttpPost" binding="tns:LocationsHttpPost">
+      <http:address location="http://ws.gismeteo.ru/Locations/Locations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
